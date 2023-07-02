@@ -16,6 +16,9 @@ const routes = [
     name: 'About',
     component: loadPage('AboutPage')
   },
+  // {
+  //   path:
+  // }
   {
     path: '/account',
     name: 'Account',
