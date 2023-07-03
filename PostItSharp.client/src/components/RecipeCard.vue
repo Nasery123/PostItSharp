@@ -2,7 +2,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-4">
-                <img class="pic elevation-4 rounded" :src="recipe.img" alt="recipe.category">
+                <router-link :to="{ name: 'RecipeDetailsPage', params: { recipeId: recipe.id } }">
+                    <img class="pic elevation-4 rounded" :src="recipe.img" alt="recipe.category">
+                </router-link>
                 <p>{{ recipe.category }}</p>
             </div>
         </div>

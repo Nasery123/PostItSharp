@@ -16,9 +16,11 @@ const routes = [
     name: 'About',
     component: loadPage('AboutPage')
   },
-  // {
-  //   path:
-  // }
+  {
+    path: '/recipes/:recipeId',
+    name: 'RecipeDetailsPage',
+    component: loadPage('RecipeDetailsPage')
+  },
   {
     path: '/account',
     name: 'Account',
