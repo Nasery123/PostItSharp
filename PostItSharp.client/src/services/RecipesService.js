@@ -16,6 +16,31 @@ class RecipesService {
         logger.log('[here we go ]', res.data)
         AppState.activeRecipe = new Recipe(res.data)
     }
+    async createRecipe(formData) {
+        const res = await api.post('api/recipes', formData)
+        logger.log('here is your new recipe', res.data)
+        AppState.recipe.push(new Recipe(res.data))
+        return res.data
+    }
+    // async editRecipe(recipeId) {
+    //     const originalRecipe = this.getRecipeById(recipeId)
+    //     const res = await api.put(`api/recipes/${recipeId}`)
+    //     originalRecipe.title = formData.title || originalRecipe.title
+    //     originalRecipe.category = formData.category || originalRecipe.category
+    //     originalRecipe.img = formData.img || originalRecipe.img
+    //     originalRecipe.istructions = formData.istructions || originalRecipe.istructions
+
+    //     AppState.recipe = new Recipe(res.data)
+    // }
+
+    // async deleteRecipe(recipeId) {
+    //     const res = await api.delete(`api/recipes/${recipeId}`)
+    //     AppState.recipe = AppState.recipe.filter(r => r.id != recipeId)
+    // }
+    // async editRecipe(recipeId) {
+    //     const res = await api.put(`api/recipes/${recipeId}`)
+    // }
+
 
 
 }
