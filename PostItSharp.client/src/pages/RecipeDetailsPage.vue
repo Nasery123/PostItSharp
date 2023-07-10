@@ -1,5 +1,5 @@
 <template>
-    <!-- <form id="EditRecipe" @submit.prevent="handleChanges">
+    <form id="EditRecipe" @submit.prevent="handleChanges">
         <div class="modal-body">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="floatingInput" placeholder="Category"
@@ -26,7 +26,7 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Save Changes</button>
         </div>
-    </form> -->
+    </form>
 
 
 
@@ -88,13 +88,13 @@ export default {
         })
         return {
             editable,
-            // async handleChanges() {
-            //     try {
-            //         await recipesService.editRecipe(editable.value)
-            //     } catch (error) {
-            //         Pop.error(error)
-            //     }
-            // },
+            async handleChanges() {
+                try {
+                    await recipesService.editRecipe(editable.value)
+                } catch (error) {
+                    Pop.error(error)
+                }
+            },
             recipe: computed(() => AppState.recipe),
             activeRecipe: computed(() => AppState.activeRecipe)
         }

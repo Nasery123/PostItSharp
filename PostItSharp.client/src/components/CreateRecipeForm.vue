@@ -55,18 +55,18 @@ export default {
                 try {
                     const formData = editable.value
                     const newRecipe = await recipesService.createRecipe(formData)
-                    // router.push({ name: 'RecipeDetailsPage', params: { recipeId: recipe.id } })
+                    router.push({ name: 'RecipeDetailsPage', params: { recipeId: recipe.id } })
                 } catch (error) {
                     Pop.error(error)
                 }
             }
-            // async EditRecipe(){
-            //     try {
-            //         const
-            //     } catch (error) {
+            //     async EditRecipe() {
+            //         try {
+            //             const
+            //         } catch (error) {
 
-            //         Pop.error(error)
-            //     }
+            //             Pop.error(error)
+            //         }
             //     }
             // }
         }

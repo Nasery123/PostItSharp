@@ -31,6 +31,7 @@ export default {
   setup() {
     async function getRecipe() {
       try {
+
         await recipesService.getRecipes();
       }
       catch (error) {
@@ -47,8 +48,9 @@ export default {
         AppState.recipe)
     };
   },
-  // components: RecipeCard
+  components: RecipeCard
 }
+
 </script>
 
 

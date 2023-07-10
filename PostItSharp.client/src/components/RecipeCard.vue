@@ -43,8 +43,8 @@ export default {
                     Pop.error(error)
                     logger.log(error)
                 }
-            }
-            // recipe: computed(() => AppState.recipe)
+            },
+            recipe: computed(() => AppState.recipe)
         }
     }
 }
