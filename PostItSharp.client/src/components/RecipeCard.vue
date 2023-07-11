@@ -1,13 +1,13 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-4">
+            <div class="col-4" @click="setActiveRecipe(recipe.id)">
 
-                <router-link :to="{ name: 'RecipeDetailsPage', params: { recipeId: recipe.id } }">
+                <!-- <router-link :to="{ name: 'RecipeDetailsPage', params: { recipeId: recipe.id } }"> -->
 
-                    <img class="pic elevation-4 rounded" :src="recipe.img" alt="">
+                <img class="pic elevation-4 rounded" :src="recipe.img" alt="" @click="">
 
-                </router-link>
+                <!-- </router-link> -->
                 <i @click.prevent="DeleteRecipe(recipe.id)" class="mdi mdi-delete"></i>
                 <p class="category">{{ recipe.category }}</p>
 
@@ -21,9 +21,11 @@
 import { computed } from 'vue';
 import { Recipe } from '../models/Recipe.js';
 import { recipesService } from '../services/RecipesService.js';
+import { ingredientsService } from '../services/IngredientsService.js'
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
+import { Modal } from 'bootstrap';
 
 export default {
     props: {
@@ -38,7 +40,7 @@ export default {
                     if (!yes) {
                         return
                     }
-                    debugger
+
                     await recipesService.deleteRecipe(recipeId)
                 } catch (error) {
                     Pop.error(error)
@@ -46,6 +48,18 @@ export default {
                 }
             },
             // recipe: computed(() => AppState.recipe)
+
+            async setActiveRecipe(recipeId) {
+                try {
+
+                    Modal.getOrCreateInstance('#recipeDetails').show()
+                    await recipesService.getRecipeById(recipeId)
+                    await ingredientsService.getIngredientsByRecipeId(recipeId)
+                } catch (error) {
+                    Pop.error(error)
+                    Pop.toast(error)
+                }
+            }
         }
     }
 }
