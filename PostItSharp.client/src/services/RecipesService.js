@@ -16,6 +16,7 @@ class RecipesService {
         logger.log("here are the AppState recipe", AppState.recipe)
     }
     async getRecipeById(recipeId) {
+
         const res = await api.get(`api/recipes/${recipeId}`)
         logger.log('[here we go ]', res.data)
         AppState.activeRecipe = new Recipe(res.data)
@@ -29,14 +30,17 @@ class RecipesService {
     async editRecipe(recipeData) {
 
         // const originalRecipe = this.getRecipeById()
-        const res = await api.put(`api/recipes/${recipeData.id}`, recipeData)
+        logger.log('[here is what you want]', recipeData)
+        let activeRecipee = AppState.activeRecipe
 
-
-        AppState.activeRecipe = new Recipe(res.data)
-        logger.log("heeeeere is ", res.data)
+        activeRecipee = await api.put(`api/recipes/${activeRecipee.id}`, recipeData)
+        logger.log('[here is the recipe you want to edir]', activeRecipee)
+        AppState.activeRecipe = new Recipe(activeRecipee)
+        logger.log("heeeeere is ", activeRecipee)
     }
 
     async deleteRecipe(recipeId) {
+        debugger
         const res = await api.delete(`api/recipes/${recipeId}`)
         AppState.recipe = AppState.recipe.filter(r => r.id != recipeId)
     }

@@ -8,7 +8,7 @@
                     <img class="pic elevation-4 rounded" :src="recipe.img" alt="">
 
                 </router-link>
-                <i @click.prevent="DeleteRecipe(recipe.recipeId)" class="mdi mdi-delete"></i>
+                <i @click.prevent="DeleteRecipe(recipe.id)" class="mdi mdi-delete"></i>
                 <p class="category">{{ recipe.category }}</p>
 
             </div>
@@ -38,6 +38,7 @@ export default {
                     if (!yes) {
                         return
                     }
+                    debugger
                     await recipesService.deleteRecipe(recipeId)
                 } catch (error) {
                     Pop.error(error)

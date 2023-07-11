@@ -1,5 +1,5 @@
 <template>
-    <form id="EditRecipe" @submit.prevent="handleChanges">
+    <form id="EditRecipe" @submit.prevent="handleChanges(recipeId)">
         <div class="modal-body">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="floatingInput" placeholder="Category"
@@ -67,10 +67,14 @@ import { logger } from '../utils/Logger.js';
 import { recipesService } from '../services/RecipesService.js';
 import { computed, onMounted, ref } from 'vue';
 import { AppState } from '../AppState.js';
+import { Recipe } from '../models/Recipe.js';
 
 export default {
-    setup() {
-        const editable = ref({})
+    props: {
+        recipe: { type: Recipe, Required: true }
+    },
+    setup(props) {
+        const editable = ref({ ...props.recipe })
         const route = useRoute()
 
 
@@ -91,6 +95,7 @@ export default {
             async handleChanges() {
                 try {
                     const recipeData = editable.value
+
                     await recipesService.editRecipe(recipeData)
                 } catch (error) {
                     Pop.error(error)
