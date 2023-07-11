@@ -47,8 +47,8 @@ export default {
       recipe: computed(() =>
         AppState.recipe)
     };
-  },
-  components: RecipeCard
+  }
+  // components: RecipeCard
 }
 
 </script>

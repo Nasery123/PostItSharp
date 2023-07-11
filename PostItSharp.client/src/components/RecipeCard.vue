@@ -5,7 +5,7 @@
 
                 <router-link :to="{ name: 'RecipeDetailsPage', params: { recipeId: recipe.id } }">
 
-                    <img class="pic elevation-4 rounded" :src="recipe.img" alt="recipe.category">
+                    <img class="pic elevation-4 rounded" :src="recipe.img" alt="">
 
                 </router-link>
                 <i @click.prevent="DeleteRecipe(recipe.recipeId)" class="mdi mdi-delete"></i>
@@ -44,7 +44,7 @@ export default {
                     logger.log(error)
                 }
             },
-            recipe: computed(() => AppState.recipe)
+            // recipe: computed(() => AppState.recipe)
         }
     }
 }

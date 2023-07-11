@@ -90,7 +90,8 @@ export default {
             editable,
             async handleChanges() {
                 try {
-                    await recipesService.editRecipe(editable.value)
+                    const recipeData = editable.value
+                    await recipesService.editRecipe(recipeData)
                 } catch (error) {
                     Pop.error(error)
                 }
