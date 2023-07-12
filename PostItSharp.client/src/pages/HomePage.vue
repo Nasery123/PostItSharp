@@ -7,7 +7,7 @@
   </div>
   <div class="d-flex">
     <div class="row">
-      <div class="col-md-3 col-12 " v-for="r in recipe" :key="r.id">
+      <div class="col-md-3 col-12 bg align-items-center justify-content-center my-2 mx-2" v-for="r in recipe" :key="r.id">
 
         <RecipeCard :recipe="r" />
       </div>
@@ -55,4 +55,8 @@ export default {
 
 
 <style lang="scss" scoped>
+.bg {
+  background-color: lightgray;
+  border-radius: 10px;
+}
 </style>
