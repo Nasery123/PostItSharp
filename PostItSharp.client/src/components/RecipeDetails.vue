@@ -42,10 +42,14 @@
 import { computed } from 'vue';
 import { AppState } from '../AppState.js';
 import { ingredients } from '../models/Ingredients.js';
+import Pop from '../utils/Pop.js';
+import { favoritesService } from '../services/FavoritesService.js'
+import { logger } from '../utils/Logger.js';
 
 export default {
     setup() {
         return {
+
 
             recipe: computed(() => AppState.recipe),
             activeRecipe: computed(() => AppState.activeRecipe),

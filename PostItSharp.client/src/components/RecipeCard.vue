@@ -1,6 +1,7 @@
 <template>
     <div class="container-fluid">
         <div class="row">
+            <!-- <card class="bg-dark"> -->
             <card class="text-light my-2 coverImg" @click="setActiveRecipe(recipe.id)"
                 :style="{ backgroundImage: `url(${recipe.img})` }">
                 <!-- <div class="col-4 pe-2 my-2"> -->
@@ -24,11 +25,14 @@
                 <i @click.prevent="DeleteRecipe(recipe.id)" class="mdi mdi-delete"></i>
                 <div>
 
-                    <p>
-                        <span class="text-end"><i class="mdi mdi-heart-outline"></i></span>
-                    </p>
+
+                    <button v-if="!isfavorite" class="text-end"><i class="mdi mdi-heart-outline"
+                            @click="createFavorite()"></i></button>
+
+                    <button v-else class="text-end"><i class="mdi mdi-heart text-danger"></i></button>
                 </div>
             </div>
+            <!-- </card> -->
 
         </div>
     </div>
@@ -44,13 +48,30 @@ import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
 import { Modal } from 'bootstrap';
+import { useRoute } from 'vue-router';
+import { favoritesService } from '../services/FavoritesService.js';
 
 export default {
     props: {
         recipe: { type: Recipe, required: true }
     },
-    setup() {
+    setup(props) {
+        // const route = useRoute()
         return {
+            async createFavorite() {
+                try {
+                    // debugger
+                    // const recipeId = route.params.recipeId
+                    const recipeId = props.recipe.id
+                    console.log('recipeId', recipeId);
+                    await favoritesService.createFavorite(recipeId)
+                } catch (error) {
+                    logger.log(error)
+                    Pop.error(error)
+                    Pop.toast(error)
+                }
+            },
+
             async DeleteRecipe(recipeId) {
                 try {
 
@@ -77,7 +98,11 @@ export default {
                     Pop.error(error)
                     Pop.toast(error)
                 }
-            }
+            },
+            isfavorite: computed(() => AppState.favorites.find(f => f.accountId == AppState.user.id)),
+            user: computed(() => AppState.user)
+            // favorites: computed(() => AppState.favorites)
+            // recipe: computed(() => AppState.recipe)
         }
     }
 }
@@ -136,6 +161,8 @@ export default {
     margin-right: 5px;
     text-align: center;
     padding-left: 5px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .det::after {
