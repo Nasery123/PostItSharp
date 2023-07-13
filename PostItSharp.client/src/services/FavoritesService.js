@@ -14,10 +14,14 @@ class FavoritesService {
     async getMyFavorites() {
         const res = await api.get('account/favorites')
         logger.log('[here are some favorite for your account]', res.data)
-
+        debugger
         AppState.favorites = res.data.map(f => new Favorite(f))
         logger.log('[THIS FAVORITES EXIST IN YOUR APPSTATE]', AppState.favorites)
 
+    }
+    async unFavoriteRecipe(recipeId) {
+        const res = await api.delete(`api/favorites/${recipeId}`)
+        logger.log('[you unfavorited this recipe]', res.data)
     }
 
 }

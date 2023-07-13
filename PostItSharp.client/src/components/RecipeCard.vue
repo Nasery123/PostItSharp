@@ -15,6 +15,7 @@
                 <div class="d-flex det">
                     <div>
                         <p class="category">{{ recipe.category }}</p>
+                        <p>{{ recipe.title }}</p>
                     </div>
 
                 </div>
@@ -29,7 +30,8 @@
                     <button v-if="!isfavorite" class="text-end"><i class="mdi mdi-heart-outline"
                             @click="createFavorite()"></i></button>
 
-                    <button v-else class="text-end"><i class="mdi mdi-heart text-danger"></i></button>
+                    <!-- <button v-else class="text-end"><i class="mdi mdi-heart text-danger" @click="unFavorite()"></i></button> -->
+                    <button class="btn btn-primary mdi mdi-thumb-down" @click="unFavorite()"></button>
                 </div>
             </div>
             <!-- </card> -->
@@ -71,6 +73,18 @@ export default {
                     Pop.toast(error)
                 }
             },
+            async unFavorite() {
+                try {
+                    const recipeId = props.recipe.id
+                    if (await Pop.confirm) {
+                        const favorite = AppState.favorites.find(f => f.creatorId == AppState.account.id)
+                        await favoritesService.unFavoriteRecipe(recipeId)
+                    }
+                } catch (error) {
+                    Pop.error(error)
+                    logger.log(error)
+                }
+            },
 
             async DeleteRecipe(recipeId) {
                 try {
@@ -99,7 +113,7 @@ export default {
                     Pop.toast(error)
                 }
             },
-            isfavorite: computed(() => AppState.favorites.find(f => f.accountId == AppState.user.id)),
+            isfavorite: computed(() => AppState.favorites.find(f => f.creatorId == AppState.user.id)),
             user: computed(() => AppState.user)
             // favorites: computed(() => AppState.favorites)
             // recipe: computed(() => AppState.recipe)

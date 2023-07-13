@@ -8,11 +8,21 @@
 
         <form @submit.prevent="createRecipe()">
             <div class="modal-body">
-                <div class="form-floating mb-3">
+                <!-- <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="floatingInput" placeholder="Category"
                         v-model="editable.Category">
                     <label for="floatingInput">Recipe Category</label>
-                </div>
+                </div> -->
+                select category
+                <select type="name" class="form-floating" v-model="editable.Category">
+
+                    <option value="mexican">Mexican</option>
+                    <option value="burger">Burger</option>
+                    <option value="soup">Soup</option>
+                    <option value="specialCoffee">Special Coffee</option>
+                    <option value="cheese">Cheese</option>
+                    <option value="italian">Italian</option>
+                </select>
                 <div class="form-floating">
                     <input type="text" class="form-control" id="floatingPassword" placeholder="Cover Image"
                         v-model="editable.img">

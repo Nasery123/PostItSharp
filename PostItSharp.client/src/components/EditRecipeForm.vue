@@ -52,6 +52,9 @@
 import { computed, mergeProps, ref } from 'vue';
 import { AppState } from '../AppState.js';
 import { Recipe } from '../models/Recipe.js';
+import Pop from '../utils/Pop.js';
+import { recipesService } from '../services/RecipesService.js';
+import { Modal } from 'bootstrap';
 
 export default {
     props: {
@@ -61,6 +64,17 @@ export default {
         const editable = ref({ ...mergeProps.recipe })
         return {
             editable,
+            async handleChanges() {
+                try {
+                    const recipeData = editable.value
+
+                    await recipesService.editRecipe(recipeData)
+                    editable.value = {}
+                    Modal.getOrCreateInstance("#editRecipe").hide()
+                } catch (error) {
+                    Pop.error(error)
+                }
+            },
 
 
             recipe: computed(() => AppState.recipe),
