@@ -107,15 +107,15 @@ export default {
         })
         return {
             editable,
-            async handleChanges() {
-                try {
-                    const recipeData = editable.value
+            // async handleChanges() {
+            //     try {
+            //         const recipeData = editable.value
 
-                    await recipesService.editRecipe(recipeData)
-                } catch (error) {
-                    Pop.error(error)
-                }
-            },
+            //         await recipesService.editRecipe(recipeData)
+            //     } catch (error) {
+            //         Pop.error(error)
+            //     }
+            // },
             recipe: computed(() => AppState.recipe),
             activeRecipe: computed(() => AppState.activeRecipe)
         }
