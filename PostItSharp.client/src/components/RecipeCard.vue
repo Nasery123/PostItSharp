@@ -30,7 +30,7 @@
                     <button v-if="!isfavorite" class="text-end"><i class="mdi mdi-heart-outline"
                             @click="createFavorite()"></i></button>
 
-                    <!-- <button v-else class="text-end"><i class="mdi mdi-heart text-danger" @click="unFavorite()"></i></button> -->
+                    <button v-else class="text-end"><i class="mdi mdi-heart text-danger" @click="unFavorite()"></i></button>
                     <button class="btn btn-primary mdi mdi-thumb-down" @click="unFavorite()"></button>
                 </div>
             </div>
